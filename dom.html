@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="json.js"></script>
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+
+
+
+		<script>
+			
+/**
+ * 构建ROOT容器
+ */
+			
+			var ul = document.createElement("ul");
+			
+			ul.setAttribute("id","root");
+		
+
+/**
+ * 获取json元素
+ *
+ */
+			var data = dom;
+
+
+/**
+ * 递归遍历
+ */
+			for(var i in data) {
+
+				var item = data[i];
+			
+				getChild(item, ul);
+
+			}
+
+
+
+
+
+
+
+			function getChild(item, dom) {
+
+
+
+/**
+ * item是数据
+ * dom是当前节点容器
+ */
+
+
+/**
+ * 首先创建节点，并且填充信息
+ */
+				var treeNode = document.createElement("li");
+				
+				treeNode.innerHTML = item.menuName;
+				
+				$(treeNode).attr("name", item.menuId);
+				
+
+
+/**
+ * 判断是否有子元素
+ */
+				
+				
+				if(item.sysMenus != null) {
+	
+/**
+ * 创建子元素容器
+ */
+					var childNode = document.createElement("ul");
+				
+					childNode.setAttribute("class","childNode");
+			
+/**
+ * 获取当前json节点的子节点
+ */
+					var doms = item.sysMenus;
+					
+
+
+/**
+ * 遍历子节点 递归
+ */
+					for(var var1 in doms){
+						
+						getChild(doms[var1],childNode);
+						
+					}
+				
+			
+/**
+ * 子节点容器添加到当前节点下方
+ */
+					$(treeNode).append(childNode);
+					
+				} 
+				
+/**
+ * 当前节点添加回当前节点容器中
+ */
+				$(dom).append(treeNode);
+
+			}
+			
+			
+			$("body").append(ul);
+		</script>
+
+	</body>
+
+</html>
